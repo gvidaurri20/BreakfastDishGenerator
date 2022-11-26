@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "100559166726",
+    "project_id": "breakfastdishgenfinalproject",
+    "storage_bucket": "breakfastdishgenfinalproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100559166726:android:c3b1eaaa66396390a65287",
+        "android_client_info": {
+          "package_name": "edu.utap.breakfastdishgenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100559166726-b2hfqc96guonri1ugs9vrig89jqgik65.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.utap.breakfastdishgenerator",
+            "certificate_hash": "70a42027a7cd1437576844f704d65ac110b46129"
+          }
+        },
+        {
+          "client_id": "100559166726-ts75o7id05pjf9i8dfc48fgts4sbdg90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOku2h6LX-19y2c7q7yulhnGoMRFZ4nT0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100559166726-ts75o7id05pjf9i8dfc48fgts4sbdg90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
