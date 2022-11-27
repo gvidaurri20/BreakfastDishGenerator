@@ -35,6 +35,10 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+
+        /*val main = activity as MainActivity?
+        val actionBarBinding = main?.actionBarBinding
+        actionBarBinding?.actionTitle?.text = "Your Homepage2"*/
     }
 
     override fun onDestroyView() {

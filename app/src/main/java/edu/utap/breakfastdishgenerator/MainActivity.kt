@@ -10,14 +10,32 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseAuth
+import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
 import edu.utap.breakfastdishgenerator.databinding.ActivityMainBinding
+import edu.utap.breakfastdishgenerator.databinding.FragmentFirstBinding
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding : ActivityMainBinding
+
+    private lateinit var firstBinding: FragmentFirstBinding
+
+    var actionBarBinding: ActionBarBinding? = null
+
+    // https://stackoverflow.com/questions/24838155/set-onclick-listener-on-action-bar-title-in-android/29823008#29823008
+    private fun initActionBar(actionBar: ActionBar) {
+        // Disable the default and enable the custom
+        actionBar.setDisplayShowTitleEnabled(false)
+        actionBar.setDisplayShowCustomEnabled(true)
+        actionBarBinding = ActionBarBinding.inflate(layoutInflater)
+        // Apply the custom view
+        actionBar.customView = actionBarBinding?.root
+        actionBarBinding?.actionTitle?.text = viewModel.observeDisplayName().value //"Your Homepage"
+    }
 
     // See: https://developer.android.com/training/basics/intents/result
     private val signInLauncher =
@@ -29,7 +47,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(savedInstanceState == null) {
+        firstBinding = FragmentFirstBinding.inflate(layoutInflater)
+        setContentView(firstBinding.root)
+        firstBinding.logoutBut.setOnClickListener {
+            println("got here")
+            // XXX Write me.
+            viewModel.signOut()
+
+            /*binding.userName.text = viewModel.observeDisplayName().value
+            binding.userEmail.text = viewModel.observeEmail().value
+            binding.userUid.text = viewModel.observeUid().value*/
+        }
+        firstBinding.loginBut.setOnClickListener {
+            // XXX Write me.
+            val user = FirebaseAuth.getInstance().currentUser
+            if(user == null) {
+                val providers = arrayListOf(
+                    AuthUI.IdpConfig.EmailBuilder().build())
+
+                val signInIntent = AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers)
+                    .build()
+                signInLauncher.launch(signInIntent)
+            }
+        }
+
+
+        /*if(savedInstanceState == null) {
             binding.displayNameET.text.clear()
         }
 
@@ -65,9 +110,14 @@ class MainActivity : AppCompatActivity() {
             if(binding.displayNameET.text.toString() != "")
                 AuthInit.setDisplayName(binding.displayNameET.text.toString(), viewModel)
             binding.displayNameET.text.clear()
-        }
+        }*/
 
         AuthInit(viewModel, signInLauncher)
+
+        /*setSupportActionBar(binding.toolbar)
+        supportActionBar?.let{
+            initActionBar(it)
+        }*/
     }
 
 
