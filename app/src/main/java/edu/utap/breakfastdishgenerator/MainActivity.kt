@@ -1,28 +1,27 @@
 package edu.utap.breakfastdishgenerator
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
-import com.firebase.ui.auth.AuthUI
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.google.firebase.auth.FirebaseAuth
 import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
 import edu.utap.breakfastdishgenerator.databinding.ActivityMainBinding
-import edu.utap.breakfastdishgenerator.databinding.FragmentFirstBinding
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        private const val mainFragTag = "userHomepageFragTag"
+        private const val favoritesFragTag = "favoritesFragTag"
+
+        var canLaunchHomepage : Boolean = false // can only launch home page if user is anywhere but home page
+        var canLaunchFavorites : Boolean = true // can only launch favorites if user is at home page
+    }
+
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding : ActivityMainBinding
-
-    private lateinit var firstBinding: FragmentFirstBinding
 
     var actionBarBinding: ActionBarBinding? = null
 
@@ -34,7 +33,55 @@ class MainActivity : AppCompatActivity() {
         actionBarBinding = ActionBarBinding.inflate(layoutInflater)
         // Apply the custom view
         actionBar.customView = actionBarBinding?.root
-        actionBarBinding?.actionTitle?.text = viewModel.observeDisplayName().value //"Your Homepage"
+        /*actionBarBinding!!.actionGoHome.setOnClickListener {
+            println("GO HOME!")
+            println("supportFragmentManager.backStackEntryCount: " + supportFragmentManager.backStackEntryCount)
+
+            if(canLaunchHomepage == true) {
+                println("supportFragmentManager.backStackEntryCount: " + supportFragmentManager.backStackEntryCount)
+                //findNavController().navigate(R.id.action_GoBacktoUserHomepage)
+            }
+        }*/
+        /*actionBarBinding!!.actionGoToFavorites.setOnClickListener {
+            println("GO TO FAVORITES!")
+            //findNavController().navigate(R.id.action_GotoUserFavorites)
+        }*/
+    }
+
+    private fun addUserHomepageFragment() {
+        // No back stack for home
+        supportFragmentManager.commit {
+            add(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            addToBackStack(null)
+        }
+    }
+
+    fun actionBarLaunchUserHomepageFragment() {
+        // XXX Write me actionBarBinding
+        actionBarBinding?.actionGoHome?.setOnClickListener {
+            println("GO HOME!")
+            supportFragmentManager.commit {
+                replace(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
+                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
+    }
+
+    fun actionBarLaunchFindDishesToMakeFragment() {
+        // XXX Write me actionBarBinding
+        actionBarBinding?.actionGoToFavorites?.setOnClickListener {
+            println("GO TO FAVORITES!")
+            supportFragmentManager.commit {
+                replace(R.id.main_frame, FindDishesToMakeFragment.newInstance(), "finddishestomakefragtag")
+                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
     }
 
     // See: https://developer.android.com/training/basics/intents/result
@@ -42,21 +89,34 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
             viewModel.updateUser()
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        /*super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.let{
+            initActionBar(it)
+        }*/
 
-        firstBinding = FragmentFirstBinding.inflate(layoutInflater)
+        super.onCreate(savedInstanceState)
+        val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
+        setSupportActionBar(activityMainBinding.toolbar)
+        supportActionBar?.let{
+            initActionBar(it)
+        }
+
+        /*firstBinding = UserHomepageBinding.inflate(layoutInflater)
         setContentView(firstBinding.root)
         firstBinding.logoutBut.setOnClickListener {
             println("got here")
             // XXX Write me.
             viewModel.signOut()
 
-            /*binding.userName.text = viewModel.observeDisplayName().value
+            *//*binding.userName.text = viewModel.observeDisplayName().value
             binding.userEmail.text = viewModel.observeEmail().value
-            binding.userUid.text = viewModel.observeUid().value*/
+            binding.userUid.text = viewModel.observeUid().value*//*
         }
         firstBinding.loginBut.setOnClickListener {
             // XXX Write me.
@@ -71,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                     .build()
                 signInLauncher.launch(signInIntent)
             }
-        }
+        }*/
 
 
         /*if(savedInstanceState == null) {
@@ -114,10 +174,15 @@ class MainActivity : AppCompatActivity() {
 
         AuthInit(viewModel, signInLauncher)
 
-        /*setSupportActionBar(binding.toolbar)
-        supportActionBar?.let{
-            initActionBar(it)
-        }*/
+        // Sets title to "Homepage of username"
+        viewModel.observeDisplayName().observe(this, Observer {
+            actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Homepage of " + viewModel.observeDisplayName().value
+        })
+
+        addUserHomepageFragment()
+        actionBarLaunchUserHomepageFragment()
+        actionBarLaunchFindDishesToMakeFragment()
+
     }
 
 

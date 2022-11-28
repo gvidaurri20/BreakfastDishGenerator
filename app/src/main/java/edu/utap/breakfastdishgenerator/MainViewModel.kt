@@ -18,14 +18,15 @@ class MainViewModel : ViewModel() {
     }
 
     fun updateUser() {
-        // XXX Write me. Update user data in view model
         val user = FirebaseAuth.getInstance().currentUser
+        println("user?.displayName in updateUser(): " + user?.displayName)
         displayName.postValue(user?.displayName)
         email.postValue(user?.email)
         uid.postValue(user?.uid)
     }
 
     fun observeDisplayName() : LiveData<String> {
+        println("displayName in observeDisplayName(): " + displayName.value)
         return displayName
     }
     fun observeEmail() : LiveData<String> {

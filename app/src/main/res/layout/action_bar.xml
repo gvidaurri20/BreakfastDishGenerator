@@ -3,16 +3,30 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:id="@+id/actionGoHome"
+        android:src="@drawable/ic_home_black_24dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:id="@+id/actionGoToFavorites"
+        android:src="@drawable/ic_favorite_black_24dp"
+        />
     <TextView
-            android:id="@+id/actionTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="start|center_vertical"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:text="@string/app_name"/>
+        android:id="@+id/actionBarTitleOfCurrentPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="start|center_vertical"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:text="@string/app_name"/>
+
 
 </LinearLayout>

@@ -63,12 +63,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    // https://developer.android.com/jetpack/androidx/releases/lifecycle
+// https://developer.android.com/jetpack/androidx/releases/lifecycle
     // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-    implementation "androidx.fragment:fragment-ktx:1.5.3"
+    //implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    //implementation "androidx.fragment:fragment-ktx:1.5.3"
 
     //adding retrofit to the app
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
