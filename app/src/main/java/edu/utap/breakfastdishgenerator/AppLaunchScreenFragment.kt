@@ -1,41 +1,44 @@
 package edu.utap.breakfastdishgenerator
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import edu.utap.breakfastdishgenerator.databinding.UserHomepageBinding
+import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
+import edu.utap.breakfastdishgenerator.databinding.AppLaunchScreenBinding
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class UserHomepageFragment : Fragment() {
+class AppLaunchScreenFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
-    private var _binding: UserHomepageBinding? = null
+    private var _binding: AppLaunchScreenBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    var actionBarBinding: ActionBarBinding? = null
 
     companion object {
-        fun newInstance(): UserHomepageFragment {
-            return UserHomepageFragment()
+        fun newInstance(): AppLaunchScreenFragment {
+            return AppLaunchScreenFragment()
         }
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = UserHomepageBinding.inflate(inflater, container, false)
+        _binding = AppLaunchScreenBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -43,27 +46,20 @@ class UserHomepageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.generateNewDishButton.setOnClickListener {
-            //findNavController().navigate(R.id.action_UserHomepage_to_FindDishesToMake)
-        }
-
         val main = activity as MainActivity?
+
         val actionBarBinding = main?.actionBarBinding
-        /*val username = viewModel.observeDisplayName().value
-        actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Homepage of " + username*/
+        actionBarBinding?.actionBarTitleOfCurrentPage?.text = "BreakfastDishGenerator"
+        actionBarBinding?.actionGoHome?.visibility = View.GONE
+        actionBarBinding?.actionGoToFavorites?.visibility = View.GONE
 
-        actionBarBinding?.actionGoHome?.visibility = View.VISIBLE
-        actionBarBinding?.actionGoToFavorites?.visibility = View.VISIBLE
-        // Sets title to "Homepage of username"
-        viewModel.observeDisplayName().observe(viewLifecycleOwner, Observer {
-            actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Homepage of " + viewModel.observeDisplayName().value
-        })
-
-        binding.logoutButton.setOnClickListener {
-            viewModel.signOut()
+        binding.signInButton.setOnClickListener {
+            if (main != null) {
+                main.clickSignInButton()
+            }
 
             parentFragmentManager.commit {
-                replace(R.id.main_frame, AppLaunchScreenFragment.newInstance(),
+                replace(R.id.main_frame, UserHomepageFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
                 // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away

@@ -13,14 +13,14 @@ import edu.utap.breakfastdishgenerator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        private const val mainFragTag = "userHomepageFragTag"
+        const val mainFragTag = "userHomepageFragTag"
         private const val favoritesFragTag = "favoritesFragTag"
 
         var canLaunchHomepage : Boolean = false // can only launch home page if user is anywhere but home page
         var canLaunchFavorites : Boolean = true // can only launch favorites if user is at home page
     }
 
-    private val viewModel: MainViewModel by viewModels()
+    val viewModel: MainViewModel by viewModels()
     private lateinit var binding : ActivityMainBinding
 
     var actionBarBinding: ActionBarBinding? = null
@@ -48,10 +48,20 @@ class MainActivity : AppCompatActivity() {
         }*/
     }
 
+    private fun addAppLaunchScreenFragment() {
+        // No back stack for home
+        supportFragmentManager.commit {
+            add(R.id.main_frame, AppLaunchScreenFragment.newInstance(), mainFragTag)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            addToBackStack(null)
+        }
+    }
+
     private fun addUserHomepageFragment() {
         // No back stack for home
         supportFragmentManager.commit {
-            add(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
+            replace(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
             // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             addToBackStack(null)
@@ -99,13 +109,7 @@ class MainActivity : AppCompatActivity() {
             initActionBar(it)
         }*/
 
-        super.onCreate(savedInstanceState)
-        val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(activityMainBinding.root)
-        setSupportActionBar(activityMainBinding.toolbar)
-        supportActionBar?.let{
-            initActionBar(it)
-        }
+
 
         /*firstBinding = UserHomepageBinding.inflate(layoutInflater)
         setContentView(firstBinding.root)
@@ -172,14 +176,22 @@ class MainActivity : AppCompatActivity() {
             binding.displayNameET.text.clear()
         }*/
 
-        AuthInit(viewModel, signInLauncher)
 
-        // Sets title to "Homepage of username"
-        viewModel.observeDisplayName().observe(this, Observer {
-            actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Homepage of " + viewModel.observeDisplayName().value
-        })
+        super.onCreate(savedInstanceState)
+        val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
+        setSupportActionBar(activityMainBinding.toolbar)
+        supportActionBar?.let{
+            initActionBar(it)
+        }
 
-        addUserHomepageFragment()
+
+
+
+        addAppLaunchScreenFragment()
+
+
+        //addUserHomepageFragment()
         actionBarLaunchUserHomepageFragment()
         actionBarLaunchFindDishesToMakeFragment()
 
@@ -230,4 +242,7 @@ class MainActivity : AppCompatActivity() {
     }
     */
 
+    fun clickSignInButton() {
+        AuthInit(viewModel, signInLauncher)
+    }
 }

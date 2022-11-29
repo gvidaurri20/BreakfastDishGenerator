@@ -46,7 +46,7 @@ class AuthInit(viewModel: MainViewModel, signInLauncher: ActivityResultLauncher<
             val signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setIsSmartLockEnabled(false) // <- ADDED THIS LINE AFTER SUBMISSION SO WILL PROBABLY GET THIS WRONG
+                .setIsSmartLockEnabled(false)
                 .build()
             signInLauncher.launch(signInIntent)
         } else {
