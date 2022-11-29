@@ -1,6 +1,5 @@
-package edu.utap.breakfastdishgenerator
+package edu.utap.breakfastdishgenerator.ui
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
+import edu.utap.breakfastdishgenerator.MainActivity
+import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
 import edu.utap.breakfastdishgenerator.databinding.AppLaunchScreenBinding
 
@@ -30,8 +31,6 @@ class AppLaunchScreenFragment : Fragment() {
             return AppLaunchScreenFragment()
         }
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +58,8 @@ class AppLaunchScreenFragment : Fragment() {
             }
 
             parentFragmentManager.commit {
-                replace(R.id.main_frame, UserHomepageFragment.newInstance(),
+                replace(
+                    R.id.main_frame, UserHomepageFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
                 // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away

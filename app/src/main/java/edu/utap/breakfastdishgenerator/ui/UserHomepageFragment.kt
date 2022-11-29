@@ -1,16 +1,16 @@
-package edu.utap.breakfastdishgenerator
+package edu.utap.breakfastdishgenerator.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import edu.utap.breakfastdishgenerator.MainActivity
+import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.databinding.UserHomepageBinding
 
 /**
@@ -43,8 +43,28 @@ class UserHomepageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewFavoritesButton.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_frame, FavoritesFragment.newInstance(),
+                    MainActivity.mainFragTag
+                )
+                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
+
         binding.generateNewDishButton.setOnClickListener {
-            //findNavController().navigate(R.id.action_UserHomepage_to_FindDishesToMake)
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_frame, FindDishesToMakeFragment.newInstance(),
+                    MainActivity.mainFragTag
+                )
+                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
         }
 
         val main = activity as MainActivity?
@@ -63,7 +83,8 @@ class UserHomepageFragment : Fragment() {
             viewModel.signOut()
 
             parentFragmentManager.commit {
-                replace(R.id.main_frame, AppLaunchScreenFragment.newInstance(),
+                replace(
+                    R.id.main_frame, AppLaunchScreenFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
                 // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away

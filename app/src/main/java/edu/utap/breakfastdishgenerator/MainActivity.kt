@@ -6,10 +6,12 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import edu.utap.breakfastdishgenerator.auth.AuthInit
 import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
 import edu.utap.breakfastdishgenerator.databinding.ActivityMainBinding
+import edu.utap.breakfastdishgenerator.ui.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     var actionBarBinding: ActionBarBinding? = null
 
-    // https://stackoverflow.com/questions/24838155/set-onclick-listener-on-action-bar-title-in-android/29823008#29823008
     private fun initActionBar(actionBar: ActionBar) {
         // Disable the default and enable the custom
         actionBar.setDisplayShowTitleEnabled(false)
@@ -33,19 +34,6 @@ class MainActivity : AppCompatActivity() {
         actionBarBinding = ActionBarBinding.inflate(layoutInflater)
         // Apply the custom view
         actionBar.customView = actionBarBinding?.root
-        /*actionBarBinding!!.actionGoHome.setOnClickListener {
-            println("GO HOME!")
-            println("supportFragmentManager.backStackEntryCount: " + supportFragmentManager.backStackEntryCount)
-
-            if(canLaunchHomepage == true) {
-                println("supportFragmentManager.backStackEntryCount: " + supportFragmentManager.backStackEntryCount)
-                //findNavController().navigate(R.id.action_GoBacktoUserHomepage)
-            }
-        }*/
-        /*actionBarBinding!!.actionGoToFavorites.setOnClickListener {
-            println("GO TO FAVORITES!")
-            //findNavController().navigate(R.id.action_GotoUserFavorites)
-        }*/
     }
 
     private fun addAppLaunchScreenFragment() {
@@ -71,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     fun actionBarLaunchUserHomepageFragment() {
         // XXX Write me actionBarBinding
         actionBarBinding?.actionGoHome?.setOnClickListener {
-            println("GO HOME!")
             supportFragmentManager.commit {
                 replace(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
                 // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
@@ -81,12 +68,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun actionBarLaunchFindDishesToMakeFragment() {
+    fun actionBarLaunchFavoritesFragment() {
         // XXX Write me actionBarBinding
         actionBarBinding?.actionGoToFavorites?.setOnClickListener {
-            println("GO TO FAVORITES!")
             supportFragmentManager.commit {
-                replace(R.id.main_frame, FindDishesToMakeFragment.newInstance(), "finddishestomakefragtag")
+                replace(R.id.main_frame, FavoritesFragment.newInstance(), "favoritedishesfrag")
                 // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
@@ -94,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // See: https://developer.android.com/training/basics/intents/result
     private val signInLauncher =
         registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
             viewModel.updateUser()
@@ -185,15 +170,10 @@ class MainActivity : AppCompatActivity() {
             initActionBar(it)
         }
 
-
-
-
         addAppLaunchScreenFragment()
-
-
         //addUserHomepageFragment()
         actionBarLaunchUserHomepageFragment()
-        actionBarLaunchFindDishesToMakeFragment()
+        actionBarLaunchFavoritesFragment()
 
     }
 
