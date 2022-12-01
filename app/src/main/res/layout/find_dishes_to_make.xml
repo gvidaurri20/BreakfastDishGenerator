@@ -30,11 +30,11 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:id="@+id/swipeRefreshLayout"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ingredients_currently_added_tv"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -50,7 +50,7 @@
         android:text="Add Ingredient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ingredients_currently_added_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/swipeRefreshLayout"/>
 
     <Button
         android:id="@+id/find_dishes_button"

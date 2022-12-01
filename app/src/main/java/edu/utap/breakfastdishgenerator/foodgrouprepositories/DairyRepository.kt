@@ -15,7 +15,7 @@ class DairyRepository {
         "Soy Products" to
                 IngredientInfo("Soy Products"),
         "Yogurt" to
-                IngredientInfo("Yogurt"),
+                IngredientInfo("Yogurt")
     )
     fun fetchData(): HashMap<String, IngredientInfo> {
         return dairyResources

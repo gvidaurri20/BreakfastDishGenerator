@@ -94,15 +94,16 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)
         binding.recyclerView.adapter = adapter
         if(foodGroupCategory == "Fruits")
-            adapter.submitList(fruitResources.values.toList())
+            adapter.submitList(fruitResources.values.toList().sortedBy { it.nameOfIngredient })
         else if(foodGroupCategory == "Vegetables")
-            adapter.submitList(vegetableResources.values.toList())
+            adapter.submitList(vegetableResources.values.toList().sortedBy { it.nameOfIngredient })
         else if(foodGroupCategory == "Grains")
-            adapter.submitList(grainsResources.values.toList())
+            adapter.submitList(grainsResources.values.toList().sortedBy { it.nameOfIngredient })
         else if(foodGroupCategory == "Proteins")
-            adapter.submitList(proteinResources.values.toList())
-        else if(foodGroupCategory == "Dairy")
-            adapter.submitList(dairyResources.values.toList())
+            adapter.submitList(proteinResources.values.toList().sortedBy { it.nameOfIngredient })
+        else if(foodGroupCategory == "Dairy") {
+            adapter.submitList(dairyResources.values.toList().sortedBy { it.nameOfIngredient })
+        }
 
 
         /*viewModel.observeFavDishPostInfos().observe(viewLifecycleOwner) {

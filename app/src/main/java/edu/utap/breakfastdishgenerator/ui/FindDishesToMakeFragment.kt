@@ -57,7 +57,7 @@ class FindDishesToMakeFragment : Fragment() {
         }
         else {
             println("count of list: " + viewModel.getIngredientListCount())
-            binding.ingredientsCurrentlyAddedTv.text = viewModel.observeIngredientsList().value.toString()
+            binding.ingredientsCurrentlyAddedTv.text = "(If There Are A Lot, You May Need to Scroll to View All of Them)"
         }
 
         // XXX Write me
