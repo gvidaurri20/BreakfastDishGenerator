@@ -90,7 +90,7 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
         // flicker
         binding.recyclerView.itemAnimator = null
 
-        adapter = IngredientRowAdapter(viewModel)
+        adapter = IngredientRowAdapter(viewModel, binding.recyclerView.context)
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)
         binding.recyclerView.adapter = adapter
         if(foodGroupCategory == "Fruits")

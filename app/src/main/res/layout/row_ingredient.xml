@@ -37,8 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:textSize="15sp"
-                    android:text="Add"
-                    android:id="@+id/addbutton"
+                    android:text="Add/Delete"
+                    android:id="@+id/addDeleteButton"
                     />
         </LinearLayout>
     </LinearLayout>

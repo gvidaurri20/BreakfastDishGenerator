@@ -6,14 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".ui.FindDishesToMakeFragment">
 
+    <TextView
+        android:id="@+id/ingredients_currently_added_message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="The following ingredients have currently been added:"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ingredients_currently_added_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No ingredients have been added yet."
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ingredients_currently_added_message_tv" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipeRefreshLayout"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <Button
-        android:id="@+id/add_ingredient_button1"
+        android:id="@+id/add_ingredient_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Ingredient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/ingredients_currently_added_tv"/>
 
     <Button
         android:id="@+id/find_dishes_button"
@@ -23,4 +60,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+        -->
 </androidx.constraintlayout.widget.ConstraintLayout>

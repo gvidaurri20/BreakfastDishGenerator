@@ -56,6 +56,7 @@ class UserHomepageFragment : Fragment() {
         }
 
         binding.generateNewDishButton.setOnClickListener {
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),

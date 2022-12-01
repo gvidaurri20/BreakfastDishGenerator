@@ -11,6 +11,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
+import edu.utap.breakfastdishgenerator.R
 
 
 @GlideModule
@@ -48,7 +49,7 @@ object Glide {
     }
 
     fun glideFetch(urlString: String, thumbnailURL: String, imageView: ImageView) {
-        /*GlideApp.with(imageView.context)
+        GlideApp.with(imageView.context)
             .asBitmap() // Try to display animated Gifs and video still
             .load(fromHtml(urlString))
             .apply(glideOptions)
@@ -63,6 +64,5 @@ object Glide {
                     .override(500, 500)
             )
             .into(imageView)
-        }*/
     }
 }

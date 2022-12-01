@@ -1,7 +1,10 @@
 package edu.utap.breakfastdishgenerator.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DiffUtil
@@ -24,7 +27,7 @@ import edu.utap.breakfastdishgenerator.databinding.RowIngredientBinding
 //
 // You can call adapterPosition to get the index of the selected item
 
-class IngredientRowAdapter(private val viewModel: MainViewModel)
+class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Context?)
     : ListAdapter<IngredientInfo, IngredientRowAdapter.ViewHolder>(IngredientDiff()) {
     class IngredientDiff : DiffUtil.ItemCallback<IngredientInfo>() {
         // Item identity
@@ -53,22 +56,46 @@ class IngredientRowAdapter(private val viewModel: MainViewModel)
     inner class ViewHolder(val rowIngredientBinding: RowIngredientBinding)
         : RecyclerView.ViewHolder(rowIngredientBinding.root) {
             init {
+                println("viewModel.whichIngredientFragmentUserIsCurrentlyViewing: " + viewModel.whichIngredientFragmentUserIsCurrentlyViewing)
                 /*if(viewModel.firstTimeHomeFragmentGetsCalled  == true) { // We only want to initialize the reddit posts and favorites search list once
                     viewModel.initializeRedditPostAndFavoritesSearchLists()
                     viewModel.firstTimeHomeFragmentGetsCalled = false
                 }*/
-                rowIngredientBinding.addbutton.setOnClickListener {
-                    println("clicked Add for " + rowIngredientBinding.nameOfIngredient.text)
+                if(viewModel.whichIngredientFragmentUserIsCurrentlyViewing == 0) {
+                    rowIngredientBinding.addDeleteButton.text = "Delete"
+                    rowIngredientBinding.addDeleteButton.setOnClickListener {
+                        println("clicked Delete for " + rowIngredientBinding.nameOfIngredient.text)
 
-                    /*parentFragmentManager.commit {
-                        replace(
-                            R.id.main_frame, FindDishesToMakeFragment.newInstance(),
-                            MainActivity.mainFragTag
-                        )
-                        // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
-                        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        addToBackStack(null)
-                    }*/
+                        viewModel.removeIngredientFromList(rowIngredientBinding.nameOfIngredient.text.toString())
+                        println("list of currently added ingredients: " + viewModel.observeIngredientsList().value)
+                        notifyDataSetChanged()
+                    }
+                }
+                else if(viewModel.whichIngredientFragmentUserIsCurrentlyViewing == 1) {
+                    rowIngredientBinding.addDeleteButton.text = "Add"
+                    rowIngredientBinding.addDeleteButton.setOnClickListener {
+                        println("clicked Add for " + rowIngredientBinding.nameOfIngredient.text)
+
+                        if(viewModel.isIngredientAlreadyAdded(rowIngredientBinding.nameOfIngredient.text.toString())) {
+                            Toast.makeText(context, "Ingredient Has Already Been Added", Toast.LENGTH_LONG).show()
+                        }
+                        else {
+                            viewModel.addIngredientToList(rowIngredientBinding.nameOfIngredient.text.toString())
+                            println("list of currently added ingredients: " + viewModel.observeIngredientsList().value)
+
+                            val activity = it.context as AppCompatActivity
+                            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
+                            activity.supportFragmentManager.commit {
+                                replace(
+                                    R.id.main_frame, FindDishesToMakeFragment.newInstance(),
+                                    MainActivity.mainFragTag
+                                )
+                                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+                                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                addToBackStack(null)
+                            }
+                        }
+                    }
                 }
             }
         }

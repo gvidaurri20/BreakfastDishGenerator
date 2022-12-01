@@ -12,11 +12,15 @@ class MainViewModel : ViewModel() {
     private var email = MutableLiveData("Uninitialized")
     private var uid = MutableLiveData("Uninitialized")
 
+    private val ingredientsList = mutableListOf<String>()
+    private val ingredientsListAsIngredientInfos = mutableListOf<IngredientInfo>()
+
     private val dishPostInfos = MutableLiveData<List<DishPostInfo>>()
     // Maintain a separate list of all favorite dish posts
     private var favDishPostInfos = mutableListOf<DishPostInfo>()
 
     var whichFragmentUserIsCurrentlyViewing: Int = 0  // Values for which fragment user is currently viewing: 0 for DishesRelatedToIngredients, 1 for FavoriteDishes
+    var whichIngredientFragmentUserIsCurrentlyViewing: Int = 0 // Values for which fragment user is currently viewing for ingredients to update RecyclerView: 0 for FindDishesToMake, 1 for AddIngredientFragment
 
     var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -63,6 +67,33 @@ class MainViewModel : ViewModel() {
     fun observeFavDishPostInfos(): LiveData<List<DishPostInfo>> {
         var liveDataFavDishPostInfo = MutableLiveData<List<DishPostInfo>>(favDishPostInfos)
         return liveDataFavDishPostInfo
+    }
+    fun observeIngredientsList(): LiveData<List<String>> {
+        var liveDataIngredientsList = MutableLiveData<List<String>>(ingredientsList)
+        return liveDataIngredientsList
+    }
+    fun observeIngredientsListAsIngredientInfos(): LiveData<List<IngredientInfo>> {
+        var liveDataIngredientsListAsIngredientInfos = MutableLiveData<List<IngredientInfo>>(ingredientsListAsIngredientInfos)
+        return liveDataIngredientsListAsIngredientInfos
+    }
+
+    // Methods to manage the added ingredients list
+    fun isIngredientListEmpty(): Boolean {
+        return ingredientsList.isEmpty()
+    }
+    fun getIngredientListCount(): Int {
+        return ingredientsList.count()
+    }
+    fun isIngredientAlreadyAdded(ingredientName: String): Boolean {
+        return ingredientsList.contains(ingredientName)
+    }
+    fun addIngredientToList(ingredientName: String) {
+        ingredientsList.add(ingredientName)
+        ingredientsListAsIngredientInfos.add(IngredientInfo(ingredientName))
+    }
+    fun removeIngredientFromList(ingredientName: String) {
+        ingredientsList.remove(ingredientName)
+        ingredientsListAsIngredientInfos.remove(IngredientInfo(ingredientName))
     }
 
     // Methods to manage the favorites list

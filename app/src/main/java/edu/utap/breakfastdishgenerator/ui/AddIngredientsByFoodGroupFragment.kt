@@ -46,7 +46,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
         actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Add Ingredient By Food Group"
 
         binding.fruitsButton.setOnClickListener {
-            println("clicked Fruits")
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Fruits"),
@@ -58,7 +58,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
             }
         }
         binding.vegetablesButton.setOnClickListener {
-            println("clicked Vegetables")
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Vegetables"),
@@ -70,7 +70,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
             }
         }
         binding.grainsButton.setOnClickListener {
-            println("clicked Grains")
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Grains"),
@@ -82,7 +82,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
             }
         }
         binding.proteinsButton.setOnClickListener {
-            println("clicked Proteins")
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Proteins"),
@@ -94,7 +94,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
             }
         }
         binding.dairyButton.setOnClickListener {
-            println("clicked Dairy")
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Dairy"),

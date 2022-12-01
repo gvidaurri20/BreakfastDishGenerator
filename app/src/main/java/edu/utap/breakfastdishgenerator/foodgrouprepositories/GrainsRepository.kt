@@ -6,6 +6,8 @@ import edu.utap.breakfastdishgenerator.api.IngredientInfo
 //data class GrainInfo(val name: String)
 class GrainsRepository {
     private var grainsResources = hashMapOf(
+        "Bread" to
+                IngredientInfo("Bread"),
         "Brown Rice" to
                 IngredientInfo("Brown Rice"),
         "Oatmeal" to
@@ -15,9 +17,7 @@ class GrainsRepository {
         "Pretzels" to
                 IngredientInfo("Pretzels"),
         "White Rice" to
-                IngredientInfo("White Rice"),
-        "Whole Wheat Bread" to
-                IngredientInfo("Whole Wheat Bread")
+                IngredientInfo("White Rice")
     )
     fun fetchData(): HashMap<String, IngredientInfo> {
         return grainsResources
