@@ -89,6 +89,9 @@ class DishesRelatedToIngredientsFragment: Fragment() {
 
         binding.recyclerView.itemAnimator = null
 
+        viewModel.fetchDishMeta()
+        println("got here2: " + viewModel.observeDishPostInfos().value)
+
         viewModel.observeDishPostInfos().observe(viewLifecycleOwner) {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()

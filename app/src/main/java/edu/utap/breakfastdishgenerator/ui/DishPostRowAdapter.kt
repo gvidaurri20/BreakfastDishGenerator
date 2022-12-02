@@ -9,6 +9,7 @@ import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.api.DishPostInfo
 //import edu.utap.breakfastdishgenerator.glide.Glide
 import edu.utap.breakfastdishgenerator.databinding.RowDishpostBinding
+import edu.utap.breakfastdishgenerator.glide.Glide
 
 // https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter
 // Slick adapter that provides submitList, so you don't worry about how to update
@@ -28,10 +29,11 @@ class DishPostRowAdapter(private val viewModel: MainViewModel)
         }
         // Item contents are the same, but the object might have changed
         override fun areContentsTheSame(oldItem: DishPostInfo, newItem: DishPostInfo): Boolean {
-            return oldItem.nameOfDish == newItem.nameOfDish
-                    && oldItem.thumbnailURL == newItem.thumbnailURL
-                    && oldItem.imageURL == newItem.imageURL
-                    && oldItem.genericRecipeOfDish == newItem.genericRecipeOfDish
+            return oldItem.TitleOfDish == newItem.TitleOfDish
+                    && oldItem.NutritionInfoOfDish == newItem.NutritionInfoOfDish
+                    && oldItem.AmountOfServingsPerDish == newItem.AmountOfServingsPerDish
+                    && oldItem.IngredientsNeededPerDish == newItem.IngredientsNeededPerDish
+                    && oldItem.RecipeOfDish == newItem.RecipeOfDish
         }
     }
 
@@ -56,8 +58,8 @@ class DishPostRowAdapter(private val viewModel: MainViewModel)
                     viewModel.firstTimeHomeFragmentGetsCalled = false
                 }*/
                 rowDishPostBinding.titleOfDish.setOnClickListener {
-                //THIS IS WHERE YOU WILL DO SOMETHING SIMILAR TO GETTING ONEPOST IN HW4, BUT INSTEAD WILL DO DISHNAME SCREEN
-                //MainViewModel.Companion.doOnePost(it.context, viewModel.getRedditPostAt(getPos(this)))
+                    println("clicked the title of the dish!")
+                    MainViewModel.Companion.moveOnToDishPostScreen(it.context, viewModel.getDishPostInfoAt(getPos(this)))
                 }
                 rowDishPostBinding.rowFav.setOnClickListener {
                     val position = getPos(this)
@@ -115,7 +117,8 @@ class DishPostRowAdapter(private val viewModel: MainViewModel)
         //viewModel.initializeSearchLists()
         val dishPostInfo = viewModel.getDishPostInfoAt(position)
         val binding = holder.rowDishPostBinding
-        binding.titleOfDish.text = dishPostInfo.nameOfDish
+        binding.titleOfDish.text = dishPostInfo.TitleOfDish
+        viewModel.glideFetch("dish1.jpg", binding.imageOfDish)
         //Glide.glideFetch(dishPostInfo.imageURL, dishPostInfo.thumbnailURL, binding.imageOfDish)
         if (viewModel.isFavorite(dishPostInfo)) {
             binding.rowFav.setImageResource(R.drawable.ic_favorite_black_24dp)

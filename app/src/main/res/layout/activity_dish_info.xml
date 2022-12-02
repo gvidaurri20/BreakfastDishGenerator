@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarOverlay"
         android:layout_width="match_parent"
@@ -23,12 +24,16 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
 
+    </com.google.android.material.appbar.AppBarLayout>
+    -->
+
+
+    <!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/linearLayoutOfTitle"
+        android:id="@+id/linearLayoutOfFavButton"
         app:layout_constraintTop_toBottomOf="@+id/appBarOverlay"
         app:layout_constraintStart_toEndOf="@+id/appBarOverlay"
         android:orientation="vertical"
@@ -42,42 +47,70 @@
             android:text="Add to / Remove from Favorites"
             />
     </LinearLayout>
+    -->
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/linearLayoutOfSelfTextwithImage"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutOfTitle"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_weight="1">
-        <ImageView
-            android:id="@+id/redditOnePostImagewithSelfText"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/ingredients_needed_textview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:scrollbars="vertical"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/generic_recipe_textview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:scrollbars="vertical"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+            android:id="@+id/linearLayoutOfDishInfoThings"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/title_of_dish_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical"
+                android:textSize="25dp"
+                />
+            <ImageView
+                android:id="@+id/image_of_dish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/nutrition_info_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:id="@+id/servings_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:id="@+id/ingredients_needed_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:id="@+id/generic_recipe_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

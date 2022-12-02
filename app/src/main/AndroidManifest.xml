@@ -27,6 +27,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name="edu.utap.breakfastdishgenerator.ui.DishPostInfoScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="true"
+            android:label="DishPostInfoScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -97,6 +97,10 @@ class FindDishesToMakeFragment : Fragment() {
                 Toast.makeText(this.context, "No Ingredients Have Been Added", Toast.LENGTH_LONG).show()
             }
             else {
+                println("Ingredients we will search for: " + viewModel.observeIngredientsList().value)
+                viewModel.fetchDishMeta()
+                println("got here1: " + viewModel.observeDishPostInfos().value)
+
                 parentFragmentManager.commit {
                     replace(
                         R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),

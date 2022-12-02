@@ -1,23 +1,31 @@
 package edu.utap.breakfastdishgenerator.api
 
-import com.google.gson.annotations.SerializedName
-
 data class DishPostInfo (
-    @SerializedName("name_of_dish")
-    val nameOfDish: String,
-    @SerializedName("thumbnail_of_dish")
-    val thumbnailURL: String,
-    @SerializedName("imageurl_of_dish")
-    val imageURL: String,
-    @SerializedName("generic_recipe_of_dish")
-    val genericRecipeOfDish: String,
+    /*//@SerializedName("title_of_dish")
+    var nameOfDish: String,
+    //@SerializedName("thumbnail_of_dish")
+    var nutritionInfo: String,
+   // @SerializedName("imageurl_of_dish")
+    var amtOfServings: String,
+    var ingredientsNeeded: String,
+    //@SerializedName("generic_recipe_of_dish")
+    var genericRecipeOfDish: String,*/
+
+    var AmountOfServingsPerDish: String = "",
+    var DishImageName: String = "",
+    var DishNumber: String = "",
+    var IngredientsNeededPerDish: String = "",
+    var NutritionInfoOfDish: String = "",
+    var RecipeOfDish: String = "",
+    var SearchTags: String = "",
+    var TitleOfDish: String = ""
 ) {
-    // NB: This changes the behavior of lists of RedditPosts.  I want posts fetched
+    // NB: This changes the behavior of lists of DishPosts.  I want posts fetched
     // at two different times to compare as equal.  By default, they will be different
     // objects with different hash codes.
     override fun equals(other: Any?) : Boolean =
         if (other is DishPostInfo) {
-            nameOfDish == other.nameOfDish
+            TitleOfDish == other.TitleOfDish
         } else {
             false
         }

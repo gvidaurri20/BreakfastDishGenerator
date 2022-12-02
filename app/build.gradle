@@ -94,6 +94,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
     kapt 'androidx.annotation:annotation:1.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    annotationProcessor 'androidx.annotation:annotation:1.5.0'
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
@@ -106,4 +108,24 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.robolectric:robolectric:4.8.1"
     testImplementation 'androidx.test:core:1.4.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Firebase stuff
+    // Import the BoM (bill of materials) for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.1'
+
 }
