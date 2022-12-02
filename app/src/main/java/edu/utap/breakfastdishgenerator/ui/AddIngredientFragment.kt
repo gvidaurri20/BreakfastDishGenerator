@@ -14,39 +14,29 @@ import edu.utap.breakfastdishgenerator.*
 import edu.utap.breakfastdishgenerator.databinding.FragmentRvBinding
 
 class AddIngredientFragment(foodGroup: String): Fragment() {
-    // A repository can be a local database or the network
-    //  or a combination of both
     private val fruitsRepository = FruitsRepository()
     private var fruitResources = fruitsRepository.fetchData()
-    // Create a list from the keys, which are fruit names
     private var fruitList = fruitResources.keys.toMutableList()
 
     private val vegetableRepository = VegetablesRepository()
     private var vegetableResources = vegetableRepository.fetchData()
-    // Create a list from the keys, which are vegetable names
     private var vegetableList = vegetableResources.keys.toMutableList()
 
     private val grainsRepository = GrainsRepository()
     private var grainsResources = grainsRepository.fetchData()
-    // Create a list from the keys, which are vegetable names
     private var grainsList = grainsResources.keys.toMutableList()
 
     private val proteinRepository = ProteinsRepository()
     private var proteinResources = proteinRepository.fetchData()
-    // Create a list from the keys, which are vegetable names
     private var proteinList = proteinResources.keys.toMutableList()
 
     private val dairyRepository = DairyRepository()
     private var dairyResources = dairyRepository.fetchData()
-    // Create a list from the keys, which are vegetable names
     private var dairyList = dairyResources.keys.toMutableList()
 
-
-    // XXX initialize viewModel
     private val viewModel: MainViewModel by activityViewModels()
 
     private var _binding: FragmentRvBinding? = null
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var adapter: IngredientRowAdapter
@@ -79,15 +69,11 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(javaClass.simpleName, "onViewCreated")
-        setDisplayHomeAsUpEnabled(true)
 
         val main = activity as MainActivity?
         val actionBarBinding = main?.actionBarBinding
         actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Add " + foodGroupCategory
 
-        // XXX Write me
-        // Setting itemAnimator = null on your recycler view might get rid of an annoying
-        // flicker
         binding.recyclerView.itemAnimator = null
 
         adapter = IngredientRowAdapter(viewModel, binding.recyclerView.context)
@@ -104,13 +90,6 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
         else if(foodGroupCategory == "Dairy") {
             adapter.submitList(dairyResources.values.toList().sortedBy { it.nameOfIngredient })
         }
-
-
-        /*viewModel.observeFavDishPostInfos().observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            adapter.notifyDataSetChanged()
-        }*/
-
 
         binding.swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             viewModel.fetchDone.observe(viewLifecycleOwner) {
@@ -140,13 +119,10 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
                     else -> true
                 }
             }
-            // XXX Write me, onMenuItemSelected
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {
-        // XXX Write me
-        // Don't let back to home button stay when we exit favorites
         super.onDestroyView()
         _binding = null
         setDisplayHomeAsUpEnabled(false)

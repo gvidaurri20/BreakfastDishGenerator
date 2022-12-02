@@ -22,7 +22,6 @@ import java.io.InputStream
 @GlideModule
 class AppGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        // You can change this to make Glide more verbose
         builder.setLogLevel(Log.ERROR)
     }
     override fun isManifestParsingEnabled(): Boolean {
@@ -37,18 +36,11 @@ class AppGlideModule : AppGlideModule() {
     }
 }
 
-// Calling glideapp.with with the most specific Activity/Fragment
-// context allows it to track lifecycles for your fetch
-// https://stackoverflow.com/questions/31964737/glide-image-loading-with-application-context
 object Glide {
     private val width = Resources.getSystem().displayMetrics.widthPixels
     private val height = Resources.getSystem().displayMetrics.heightPixels
     private var glideOptions = RequestOptions ()
-        // Options like CenterCrop are possible, but I like this one best
-        // Evidently you need fitCenter or dontTransform.  If you use centerCrop, your
-        // list disappears.  I think that was an old bug.
         .fitCenter()
-        // Rounded corners are so lovely.
         .transform(RoundedCorners (20))
 
     private fun fromHtml(source: String): String {
@@ -80,12 +72,10 @@ object Glide {
 
 
     fun fetch(storageReference: StorageReference, imageView: ImageView) {
-        // Layout engine does not know size of imageView
-        // Hardcoding this here is a bad idea.  What would be better?
         val width = 600
         val height = 600
         GlideApp.with(imageView.context)
-            .asBitmap() // Try to display animated Gifs and video still
+            .asBitmap()
             .load(storageReference)
             .apply(glideOptions)
             .error(android.R.color.holo_red_dark)

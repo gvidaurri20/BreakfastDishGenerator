@@ -10,22 +10,15 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import edu.utap.breakfastdishgenerator.MainActivity
 import edu.utap.breakfastdishgenerator.R
-import edu.utap.breakfastdishgenerator.api.IngredientInfo
 import edu.utap.breakfastdishgenerator.databinding.FindDishesToMakeBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+
 class FindDishesToMakeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FindDishesToMakeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var adapter: IngredientRowAdapter
@@ -56,20 +49,15 @@ class FindDishesToMakeFragment : Fragment() {
             binding.ingredientsCurrentlyAddedTv.text = "No Ingredients Have Been Added Yet"
         }
         else {
-            println("count of list: " + viewModel.getIngredientListCount())
             binding.ingredientsCurrentlyAddedTv.text = "(If There Are A Lot, You May Need to Scroll to View All of Them)"
         }
 
-        // XXX Write me
-        // Setting itemAnimator = null on your recycler view might get rid of an annoying
-        // flicker
         binding.recyclerView.itemAnimator = null
         adapter = IngredientRowAdapter(viewModel, binding.recyclerView.context)
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.recyclerView.context)
         binding.recyclerView.adapter = adapter
 
         viewModel.observeIngredientsListAsIngredientInfos().observe(viewLifecycleOwner) {
-            println("viewModel.observeIngredientsListAsIngredientInfos().value: " + viewModel.observeIngredientsListAsIngredientInfos().value)
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
         }
@@ -86,7 +74,6 @@ class FindDishesToMakeFragment : Fragment() {
                     R.id.main_frame, AddIngredientsByFoodGroupFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
@@ -97,16 +84,14 @@ class FindDishesToMakeFragment : Fragment() {
                 Toast.makeText(this.context, "No Ingredients Have Been Added", Toast.LENGTH_LONG).show()
             }
             else {
-                println("Ingredients we will search for: " + viewModel.observeIngredientsList().value)
                 viewModel.fetchDishMeta()
-                println("got here1: " + viewModel.observeDishPostInfos().value)
 
+                viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
                 parentFragmentManager.commit {
                     replace(
                         R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),
                         MainActivity.mainFragTag
                     )
-                    // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                     setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     addToBackStack(null)
                 }

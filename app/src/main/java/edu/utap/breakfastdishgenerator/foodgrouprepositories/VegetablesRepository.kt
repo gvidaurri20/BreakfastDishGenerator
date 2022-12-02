@@ -2,8 +2,6 @@ package edu.utap.breakfastdishgenerator
 
 import edu.utap.breakfastdishgenerator.api.IngredientInfo
 
-// This is the model in MVVM
-//data class VegetableInfo(val name: String)
 class VegetablesRepository {
     private var vegetableResources = hashMapOf(
         "Avocado" to

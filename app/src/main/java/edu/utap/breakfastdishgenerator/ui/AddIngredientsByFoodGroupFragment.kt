@@ -12,15 +12,9 @@ import edu.utap.breakfastdishgenerator.MainActivity
 import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.databinding.AddIngredientsByFoodGroupBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class AddIngredientsByFoodGroupFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: AddIngredientsByFoodGroupBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     companion object {
@@ -46,61 +40,61 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
         actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Add Ingredient By Food Group"
 
         binding.fruitsButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Fruits"),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
         binding.vegetablesButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Vegetables"),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
         binding.grainsButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Grains"),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
         binding.proteinsButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Proteins"),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
         binding.dairyButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AddIngredientFragment.newInstance("Dairy"),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }

@@ -24,16 +24,17 @@
             android:textSize="50dp"
             android:layout_weight="1"
             />
+
         <ImageView
             android:id="@+id/application_image_iv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
+            android:layout_height="250dp"
             android:layout_weight="1"
-            />
+            android:gravity="center"
+            android:src="@drawable/breakfast_gen_logo" />
         <Space
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="10dp"
             android:layout_weight="1" />
         <Button
             android:id="@+id/sign_in_button"
@@ -51,6 +52,7 @@
             android:id="@+id/textExplanationToUser_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="left"
             android:text="When you click the Sign In button, on the next page enter the email address associated with your account. If you are a new user, it will prompt you to create a new account and password."
             android:textSize="22dp"

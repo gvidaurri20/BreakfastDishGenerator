@@ -32,8 +32,6 @@ class DishPostInfoScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //actionBar?.setDisplayShowCustomEnabled(true)
-
         // Get the Intent that called for this Activity to open
         val activityThatCalled = intent
         // Get the data that was sent

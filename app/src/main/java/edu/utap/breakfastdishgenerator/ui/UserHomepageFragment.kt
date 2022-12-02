@@ -13,15 +13,9 @@ import edu.utap.breakfastdishgenerator.MainActivity
 import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.databinding.UserHomepageBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class UserHomepageFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: UserHomepageBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     companion object {
@@ -44,12 +38,12 @@ class UserHomepageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewFavoritesButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 1
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, FavoritesFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
@@ -62,7 +56,6 @@ class UserHomepageFragment : Fragment() {
                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
@@ -70,9 +63,6 @@ class UserHomepageFragment : Fragment() {
 
         val main = activity as MainActivity?
         val actionBarBinding = main?.actionBarBinding
-        /*val username = viewModel.observeDisplayName().value
-        actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Homepage of " + username*/
-
         actionBarBinding?.actionGoHome?.visibility = View.VISIBLE
         actionBarBinding?.actionGoToFavorites?.visibility = View.VISIBLE
         // Sets title to "Homepage of username"
@@ -83,12 +73,12 @@ class UserHomepageFragment : Fragment() {
         binding.logoutButton.setOnClickListener {
             viewModel.signOut()
 
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, AppLaunchScreenFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }

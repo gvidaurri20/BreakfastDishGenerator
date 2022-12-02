@@ -2,8 +2,6 @@ package edu.utap.breakfastdishgenerator
 
 import edu.utap.breakfastdishgenerator.api.IngredientInfo
 
-// This is the model in MVVM
-//data class ProteinInfo(val name: String)
 class ProteinsRepository {
     private var proteinResources = hashMapOf(
         "Beef" to

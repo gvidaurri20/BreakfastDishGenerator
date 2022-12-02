@@ -8,14 +8,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import edu.utap.breakfastdishgenerator.ui.MainViewModel
 
-// https://firebase.google.com/docs/auth/android/firebaseui
 class AuthInit(viewModel: MainViewModel, signInLauncher: ActivityResultLauncher<Intent>) {
     companion object {
         private const val TAG = "AuthInit"
         fun setDisplayName(displayName : String, viewModel: MainViewModel) {
             Log.d(TAG, "XXX profile change request")
-            // XXX Write me. User is attempting to update display name. Get the profile updates (see android doc)
-
             Log.d(TAG, "XXX profile change request to name $displayName")
             val user = FirebaseAuth.getInstance().currentUser
             val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(displayName).build()
@@ -23,9 +20,7 @@ class AuthInit(viewModel: MainViewModel, signInLauncher: ActivityResultLauncher<
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d(TAG, "User profile updated.")
-
                         user?.reload()
-                        // the below still outputs the previous display name and now the updated displayName
                         Log.d(TAG, "XXX user changed to ${user?.displayName}")
                         viewModel.updateUser()
                     }
@@ -43,7 +38,7 @@ class AuthInit(viewModel: MainViewModel, signInLauncher: ActivityResultLauncher<
                 AuthUI.IdpConfig.EmailBuilder().build())
 
             // Create and launch sign-in intent
-            // XXX Write me. Set authentication providers and start sign-in for user
+            // Set authentication providers and start sign-in for user
             val signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)

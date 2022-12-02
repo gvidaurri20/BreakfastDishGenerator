@@ -12,20 +12,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import edu.utap.breakfastdishgenerator.MainActivity
 import edu.utap.breakfastdishgenerator.R
-import edu.utap.breakfastdishgenerator.api.DishPostInfo
 import edu.utap.breakfastdishgenerator.api.IngredientInfo
-//import edu.utap.breakfastdishgenerator.glide.Glide
-import edu.utap.breakfastdishgenerator.databinding.RowDishpostBinding
 import edu.utap.breakfastdishgenerator.databinding.RowIngredientBinding
 
-// https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter
-// Slick adapter that provides submitList, so you don't worry about how to update
-// the list, you just submit a new one when you want to change the list and the
-// Diff class computes the smallest set of changes that need to happen.
-// NB: Both the old and new lists must both be in memory at the same time.
-// So you can copy the old list, change it into a new list, then submit the new list.
-//
-// You can call adapterPosition to get the index of the selected item
 
 class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Context?)
     : ListAdapter<IngredientInfo, IngredientRowAdapter.ViewHolder>(IngredientDiff()) {
@@ -40,13 +29,10 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
         }
     }
 
-    // https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder#getBindingAdapterPosition()
-    // Getting the position of the selected item is unfortunately complicated
-    // This always returns a valid index.
+
     private fun getPos(holder: ViewHolder) : Int {
         val pos = holder.adapterPosition
-        // notifyDataSetChanged was called, so position is not known
-        if( pos == RecyclerView.NO_POSITION) {
+        if(pos == RecyclerView.NO_POSITION) {
             return holder.adapterPosition
         }
         return pos
@@ -56,33 +42,21 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
     inner class ViewHolder(val rowIngredientBinding: RowIngredientBinding)
         : RecyclerView.ViewHolder(rowIngredientBinding.root) {
             init {
-                println("viewModel.whichIngredientFragmentUserIsCurrentlyViewing: " + viewModel.whichIngredientFragmentUserIsCurrentlyViewing)
-                /*if(viewModel.firstTimeHomeFragmentGetsCalled  == true) { // We only want to initialize the reddit posts and favorites search list once
-                    viewModel.initializeRedditPostAndFavoritesSearchLists()
-                    viewModel.firstTimeHomeFragmentGetsCalled = false
-                }*/
                 if(viewModel.whichIngredientFragmentUserIsCurrentlyViewing == 0) {
                     rowIngredientBinding.addDeleteButton.text = "Delete"
                     rowIngredientBinding.addDeleteButton.setOnClickListener {
-                        println("clicked Delete for " + rowIngredientBinding.nameOfIngredient.text)
-
                         viewModel.removeIngredientFromList(rowIngredientBinding.nameOfIngredient.text.toString())
-                        println("list of currently added ingredients: " + viewModel.observeIngredientsList().value)
                         notifyDataSetChanged()
                     }
                 }
                 else if(viewModel.whichIngredientFragmentUserIsCurrentlyViewing == 1) {
                     rowIngredientBinding.addDeleteButton.text = "Add"
                     rowIngredientBinding.addDeleteButton.setOnClickListener {
-                        println("clicked Add for " + rowIngredientBinding.nameOfIngredient.text)
-
                         if(viewModel.isIngredientAlreadyAdded(rowIngredientBinding.nameOfIngredient.text.toString())) {
                             Toast.makeText(context, "Ingredient Has Already Been Added", Toast.LENGTH_LONG).show()
                         }
                         else {
                             viewModel.addIngredientToList(rowIngredientBinding.nameOfIngredient.text.toString())
-                            println("list of currently added ingredients: " + viewModel.observeIngredientsList().value)
-
                             val activity = it.context as AppCompatActivity
                             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
                             activity.supportFragmentManager.commit {
@@ -90,7 +64,6 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
                                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),
                                     MainActivity.mainFragTag
                                 )
-                                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 addToBackStack(null)
                             }
@@ -108,30 +81,7 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        /*if (viewModel.whichFragmentUserIsCurrentlyViewing == 1 && (position >= viewModel.getFavoriteCountSize())) { // Resolves a bug where a position gets passed in that is beyond the size of the favorites list
-            Log.d(javaClass.simpleName, "Argument for position passed to onBindViewHolder() was outside max index of favorites list. \nMax Index of Favorites List: "
-                    + viewModel.getFavoriteCountSize() + "\nPosition Argument Passed In: " + position)
-            return
-        }
-        if (viewModel.whichFragmentUserIsCurrentlyViewing == 1 && (position >= viewModel.getSearchedFavoriteCountSize())) { // Resolves a bug where a position gets passed in that is beyond the size of the searched favorites list
-            Log.d(javaClass.simpleName, "Argument for position passed to onBindViewHolder() was outside max index of searched favorites list. \nMax Index of Searched Favorites List: "
-                    + viewModel.getSearchedFavoriteCountSize() + "\nPosition Argument Passed In: " + position)
-            return
-        }
-        if (viewModel.whichFragmentUserIsCurrentlyViewing == 0 && (position >= viewModel.getRedditPostsCountSize())) { // Resolves a bug where a position gets passed in that is beyond the size of the reddit post lists
-            Log.d(javaClass.simpleName, "Argument for position passed to onBindViewHolder() was outside max index of searched reddit posts list. \nMax Index of Searched Reddit Post List: "
-                    + viewModel.getRedditPostsCountSize() + "\nPosition Argument Passed In: " + position)
-            return
-        }
-        if (viewModel.whichFragmentUserIsCurrentlyViewing == 2 && (position >= viewModel.getRedditPostsCountSize())) { // Resolves a bug where a position gets passed in that is beyond the size of the reddit post lists in subreddits
-            Log.d(javaClass.simpleName, "Argument for position passed to onBindViewHolder() was outside max index of searched reddit posts list. \nMax Index of Searched Reddit Post List: "
-                    + viewModel.getRedditPostsCountSize() + "\nPosition Argument Passed In: " + position)
-            return
-        }*/
-        //viewModel.initializeSearchLists()
         val ingredientInfo = getItem(position)
         val binding = holder.rowIngredientBinding
-        binding.nameOfIngredient.text = ingredientInfo.nameOfIngredient
-        //Glide.glideFetch(dishPostInfo.imageURL, dishPostInfo.thumbnailURL, binding.imageOfDish)
-    }
+        binding.nameOfIngredient.text = ingredientInfo.nameOfIngredient }
 }

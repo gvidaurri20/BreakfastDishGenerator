@@ -11,7 +11,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import edu.utap.breakfastdishgenerator.api.DishPostInfo
 import edu.utap.breakfastdishgenerator.api.IngredientInfo
-import edu.utap.breakfastdishgenerator.auth.FirestoreAuthLiveData
 import edu.utap.breakfastdishgenerator.glide.Glide
 
 class MainViewModel : ViewModel() {
@@ -26,15 +25,13 @@ class MainViewModel : ViewModel() {
     // Maintain a separate list of all favorite dish posts
     private var favDishPostInfos = mutableListOf<DishPostInfo>()
 
-    var whichFragmentUserIsCurrentlyViewing: Int = 0  // Values for which fragment user is currently viewing: 0 for DishesRelatedToIngredients, 1 for FavoriteDishes
+    var whichDishesFragmentUserIsCurrentlyViewing: Int = 0  // Values for which fragment user is currently viewing for Dish Posts: 0 for DishesRelatedToIngredients, 1 for FavoriteDishes
     var whichIngredientFragmentUserIsCurrentlyViewing: Int = 0 // Values for which fragment user is currently viewing for ingredients to update RecyclerView: 0 for FindDishesToMake, 1 for AddIngredientFragment
 
     var fetchDone : MutableLiveData<Boolean> = MutableLiveData(false)
 
     // Database access
     private val dbHelp = ViewModelDBHelper()
-    private var firebaseAuthLiveData = FirestoreAuthLiveData()
-
 
     // Methods involving the user information
     private fun userLogout() {
@@ -62,14 +59,25 @@ class MainViewModel : ViewModel() {
         userLogout()
     }
 
-    // Methods to get list values
+    // Methods to for the dishPostList
+    fun getDishPostInfos(): MutableLiveData<List<DishPostInfo>> {
+        return dishPostInfos
+    }
     fun getDishPostInfoAt(position: Int) : DishPostInfo {
-        if (whichFragmentUserIsCurrentlyViewing == 0) {
+        if (whichDishesFragmentUserIsCurrentlyViewing == 0) {
             return dishPostInfos.value!![position]
         }
         else { //if (whichFragmentUserIsCurrentlyViewing == 1) {
             return favDishPostInfos[position]
         }
+    }
+    fun getDishPostInfosCountSize() : Int {
+        return dishPostInfos.value!!.size
+    }
+    fun removeDishPostInfo(dishPostInfo: DishPostInfo) {
+        dishPostInfos.value = dishPostInfos.value?.toMutableList()?.apply {
+            remove(dishPostInfo)
+        }?.toList()
     }
 
     // Methods to observe the lists
@@ -96,6 +104,9 @@ class MainViewModel : ViewModel() {
     fun getIngredientListCount(): Int {
         return ingredientsList.count()
     }
+    fun getIngredientList(): List<String> {
+        return ingredientsList
+    }
     fun isIngredientAlreadyAdded(ingredientName: String): Boolean {
         return ingredientsList.contains(ingredientName)
     }
@@ -109,6 +120,9 @@ class MainViewModel : ViewModel() {
     }
 
     // Methods to manage the favorites list
+    fun getFavoriteCountSize() : Int {
+        return favDishPostInfos.size
+    }
     fun isFavorite(dishPostInfo: DishPostInfo): Boolean {
         return favDishPostInfos.contains(dishPostInfo)
     }
@@ -119,10 +133,11 @@ class MainViewModel : ViewModel() {
         favDishPostInfos.remove(dishPostInfo)
     }
 
+
+    // Methods of fetching
     fun fetchDishMeta() {
         dbHelp.dbFetchDishMeta(dishPostInfos)
     }
-
     fun glideFetch(imageName: String, imageView: ImageView) {
         // Create a storage reference from our app
         val photoStorage: StorageReference =
@@ -131,7 +146,7 @@ class MainViewModel : ViewModel() {
             imageView)
     }
 
-    // Convenient place to put it as it is shared
+
     companion object {
         fun moveOnToDishPostScreen(context: Context, dishPost: DishPostInfo) {
             val dishPostIntent = Intent(context, DishPostInfoScreen::class.java)

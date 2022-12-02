@@ -13,16 +13,9 @@ import edu.utap.breakfastdishgenerator.R
 import edu.utap.breakfastdishgenerator.databinding.ActionBarBinding
 import edu.utap.breakfastdishgenerator.databinding.AppLaunchScreenBinding
 
-
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class AppLaunchScreenFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: AppLaunchScreenBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     var actionBarBinding: ActionBarBinding? = null
 
@@ -62,7 +55,6 @@ class AppLaunchScreenFragment : Fragment() {
                     R.id.main_frame, UserHomepageFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
