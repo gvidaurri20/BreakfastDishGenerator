@@ -8,12 +8,14 @@ class GrainsRepository {
                 IngredientInfo("Bread"),
         "Cereal" to
                 IngredientInfo("Cereal"),
-        "Quinoa" to
-                IngredientInfo("Quinoa"),
         "Muffins" to
                 IngredientInfo("Muffins"),
         "Oats" to
                 IngredientInfo("Oats"),
+        "Pancakes" to
+                IngredientInfo("Pancakes"),
+        "Quinoa" to
+                IngredientInfo("Quinoa"),
         "Tortillas" to
                 IngredientInfo("Tortillas")
     )

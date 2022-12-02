@@ -59,6 +59,7 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
                             viewModel.addIngredientToList(rowIngredientBinding.nameOfIngredient.text.toString())
                             val activity = it.context as AppCompatActivity
                             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
+                            viewModel.userChoosingToViewAllDishes == false
                             activity.supportFragmentManager.commit {
                                 replace(
                                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),

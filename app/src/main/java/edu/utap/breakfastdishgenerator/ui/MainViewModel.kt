@@ -22,6 +22,7 @@ class MainViewModel : ViewModel() {
     private val ingredientsListAsIngredientInfos = mutableListOf<IngredientInfo>()
 
     private val dishPostInfos = MutableLiveData<List<DishPostInfo>>()
+    private val dishPostInfosWithIngredientsFromUser = mutableListOf<DishPostInfo>()
     // Maintain a separate list of all favorite dish posts
     private var favDishPostInfos = mutableListOf<DishPostInfo>()
 
@@ -64,6 +65,11 @@ class MainViewModel : ViewModel() {
     fun getDishPostInfos(): MutableLiveData<List<DishPostInfo>> {
         return dishPostInfos
     }
+    fun getDishPostInfosWithIngredientsFromUser(): List<DishPostInfo> {//LiveData<List<DishPostInfo>> {
+        /*var liveDataDishPostInfo = MutableLiveData<List<DishPostInfo>>(dishPostInfosWithIngredientsFromUser)
+        return liveDataDishPostInfo*/
+        return dishPostInfosWithIngredientsFromUser
+    }
     fun getDishPostInfoAt(position: Int) : DishPostInfo {
         if (whichDishesFragmentUserIsCurrentlyViewing == 0) {
             return dishPostInfos.value!![position]
@@ -79,6 +85,9 @@ class MainViewModel : ViewModel() {
         dishPostInfos.value = dishPostInfos.value?.toMutableList()?.apply {
             remove(dishPostInfo)
         }?.toList()
+    }
+    fun addDishPostInfoToOneWithIngredients(dishPostInfo: DishPostInfo) {
+        dishPostInfosWithIngredientsFromUser.add(dishPostInfo)
     }
 
     // Methods to observe the lists
