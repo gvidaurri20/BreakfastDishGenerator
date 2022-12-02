@@ -4,14 +4,14 @@ import edu.utap.breakfastdishgenerator.api.IngredientInfo
 
 class DairyRepository {
     private var dairyResources = hashMapOf(
+        "Butter" to
+                IngredientInfo("Butter"),
         "Cheese" to
                 IngredientInfo("Cheese"),
-        "Cottage Cheese" to
-                IngredientInfo("Cottage Cheese"),
+        "Cream" to
+                IngredientInfo("Cream"),
         "Milk" to
                 IngredientInfo("Milk"),
-        "Soy Products" to
-                IngredientInfo("Soy Products"),
         "Yogurt" to
                 IngredientInfo("Yogurt")
     )

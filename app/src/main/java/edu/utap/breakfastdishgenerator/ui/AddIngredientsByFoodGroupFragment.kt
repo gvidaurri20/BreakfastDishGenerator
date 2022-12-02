@@ -99,6 +99,30 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                 addToBackStack(null)
             }
         }
+        binding.sweetsButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_frame, AddIngredientFragment.newInstance("Sweets"),
+                    MainActivity.mainFragTag
+                )
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
+        binding.othersButton.setOnClickListener {
+            viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 1
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_frame, AddIngredientFragment.newInstance("Others"),
+                    MainActivity.mainFragTag
+                )
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
     }
 
     override fun onDestroyView() {

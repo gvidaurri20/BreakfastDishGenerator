@@ -8,34 +8,44 @@ class FruitsRepository {
                 IngredientInfo("Apples"),
         "Bananas" to
                 IngredientInfo("Bananas"),
+        "Berries" to
+                IngredientInfo("Berries"),
+        "Blackberries" to
+                IngredientInfo("Blackberries"),
         "Blueberries" to
                 IngredientInfo("Blueberries"),
         "Cantaloupes" to
                 IngredientInfo("Cantaloupes"),
         "Cherries" to
                 IngredientInfo("Cherries"),
-        "Grapefruits" to
-                IngredientInfo("Grapefruits"),
+        "Coconuts" to
+                IngredientInfo("Coconuts"),
+        "Dates" to
+                IngredientInfo("Dates"),
         "Grapes" to
                 IngredientInfo("Grapes"),
-        "Mangos" to
-                IngredientInfo("Mangos"),
+        "Kiwis" to
+                IngredientInfo("Kiwis"),
+        "Lemons" to
+                IngredientInfo("Lemons"),
+        "Mangoes" to
+                IngredientInfo("Mangoes"),
+        "Olives" to
+                IngredientInfo("Olives"),
         "Oranges" to
                 IngredientInfo("Oranges"),
         "Peaches" to
                 IngredientInfo("Peaches"),
-        "Pears" to
-                IngredientInfo("Pears"),
         "Pineapples" to
                 IngredientInfo("Pineapples"),
         "Pomegranates" to
                 IngredientInfo("Pomegranates"),
-        "Raisins" to
-                IngredientInfo("Raisins"),
+        "Pumpkins" to
+                IngredientInfo("Pumpkins"),
         "Strawberries" to
                 IngredientInfo("Strawberries"),
-        "Watermelons" to
-                IngredientInfo("Watermelons")
+        "Raspberries" to
+                IngredientInfo("Raspberries"),
     )
     fun fetchData(): HashMap<String, IngredientInfo> {
         return fruitResources

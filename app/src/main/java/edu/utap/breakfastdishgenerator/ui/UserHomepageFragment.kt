@@ -28,10 +28,8 @@ class UserHomepageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = UserHomepageBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,9 +49,23 @@ class UserHomepageFragment : Fragment() {
 
         binding.generateNewDishButton.setOnClickListener {
             viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
+            viewModel.userChoosingToViewAllDishes = false
             parentFragmentManager.commit {
                 replace(
                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),
+                    MainActivity.mainFragTag
+                )
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                addToBackStack(null)
+            }
+        }
+
+        binding.seeAllDishesButton.setOnClickListener {
+            viewModel.userChoosingToViewAllDishes = true
+            viewModel.whichIngredientFragmentUserIsCurrentlyViewing = 0
+            parentFragmentManager.commit {
+                replace(
+                    R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

@@ -25,6 +25,7 @@ class MainViewModel : ViewModel() {
     // Maintain a separate list of all favorite dish posts
     private var favDishPostInfos = mutableListOf<DishPostInfo>()
 
+    var userChoosingToViewAllDishes: Boolean = false
     var whichDishesFragmentUserIsCurrentlyViewing: Int = 0  // Values for which fragment user is currently viewing for Dish Posts: 0 for DishesRelatedToIngredients, 1 for FavoriteDishes
     var whichIngredientFragmentUserIsCurrentlyViewing: Int = 0 // Values for which fragment user is currently viewing for ingredients to update RecyclerView: 0 for FindDishesToMake, 1 for AddIngredientFragment
 

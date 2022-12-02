@@ -6,16 +6,16 @@ class GrainsRepository {
     private var grainsResources = hashMapOf(
         "Bread" to
                 IngredientInfo("Bread"),
-        "Brown Rice" to
-                IngredientInfo("Brown Rice"),
-        "Oatmeal" to
-                IngredientInfo("Oatmeal"),
-        "Popcorn" to
-                IngredientInfo("Popcorn"),
-        "Pretzels" to
-                IngredientInfo("Pretzels"),
-        "White Rice" to
-                IngredientInfo("White Rice")
+        "Cereal" to
+                IngredientInfo("Cereal"),
+        "Quinoa" to
+                IngredientInfo("Quinoa"),
+        "Muffins" to
+                IngredientInfo("Muffins"),
+        "Oats" to
+                IngredientInfo("Oats"),
+        "Tortillas" to
+                IngredientInfo("Tortillas")
     )
     fun fetchData(): HashMap<String, IngredientInfo> {
         return grainsResources

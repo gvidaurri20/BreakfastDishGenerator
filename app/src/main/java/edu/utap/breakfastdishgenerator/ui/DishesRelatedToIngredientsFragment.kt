@@ -79,15 +79,21 @@ class DishesRelatedToIngredientsFragment: Fragment() {
         viewModel.fetchDishMeta()
 
         viewModel.observeDishPostInfos().observe(viewLifecycleOwner) {
-            for(ingredient in viewModel.getIngredientList()) {
-                for (dishPostInfo in it) {
-                    if(!dishPostInfo.SearchTags.contains(ingredient.lowercase(), ignoreCase = true)) {
-                        viewModel.removeDishPostInfo(dishPostInfo)
+            if(viewModel.userChoosingToViewAllDishes == false) {
+                for(ingredient in viewModel.getIngredientList()) {
+                    for (dishPostInfo in it) {
+                        if(!dishPostInfo.SearchTags.contains(ingredient.lowercase(), ignoreCase = true)) {
+                            viewModel.removeDishPostInfo(dishPostInfo)
+                        }
                     }
                 }
+                adapter.submitList(viewModel.getDishPostInfos().value!!)
+                adapter.notifyDataSetChanged()
             }
-            adapter.submitList(viewModel.getDishPostInfos().value!!)
-            adapter.notifyDataSetChanged()
+            else {
+                adapter.submitList(it)
+                adapter.notifyDataSetChanged()
+            }
         }
 
         initSwipeLayout(binding.swipeRefreshLayout)

@@ -34,6 +34,14 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
     private var dairyResources = dairyRepository.fetchData()
     private var dairyList = dairyResources.keys.toMutableList()
 
+    private val sweetsRepository = SweetsRepository()
+    private var sweetsResources = sweetsRepository.fetchData()
+    private var sweetsList = sweetsResources.keys.toMutableList()
+
+    private val othersRepository = OthersRepository()
+    private var othersResources = othersRepository.fetchData()
+    private var othersList = othersResources.keys.toMutableList()
+
     private val viewModel: MainViewModel by activityViewModels()
 
     private var _binding: FragmentRvBinding? = null
@@ -87,9 +95,12 @@ class AddIngredientFragment(foodGroup: String): Fragment() {
             adapter.submitList(grainsResources.values.toList().sortedBy { it.nameOfIngredient })
         else if(foodGroupCategory == "Proteins")
             adapter.submitList(proteinResources.values.toList().sortedBy { it.nameOfIngredient })
-        else if(foodGroupCategory == "Dairy") {
+        else if(foodGroupCategory == "Dairy")
             adapter.submitList(dairyResources.values.toList().sortedBy { it.nameOfIngredient })
-        }
+        else if(foodGroupCategory == "Sweets")
+            adapter.submitList(sweetsResources.values.toList().sortedBy { it.nameOfIngredient })
+        else if(foodGroupCategory == "Others")
+            adapter.submitList(othersResources.values.toList().sortedBy { it.nameOfIngredient })
 
         binding.swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             viewModel.fetchDone.observe(viewLifecycleOwner) {
