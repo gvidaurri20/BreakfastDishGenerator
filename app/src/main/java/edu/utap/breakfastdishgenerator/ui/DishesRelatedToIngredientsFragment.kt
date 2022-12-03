@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import edu.utap.breakfastdishgenerator.MainActivity
-import edu.utap.breakfastdishgenerator.api.DishPostInfo
 import edu.utap.breakfastdishgenerator.databinding.FragmentRvBinding
 
 
@@ -79,6 +78,7 @@ class DishesRelatedToIngredientsFragment: Fragment() {
 
         viewModel.fetchDishMeta()
 
+        // Algorithm for searching for dishes with the given ingredients supplied by user
         viewModel.observeDishPostInfos().observe(viewLifecycleOwner) {
             if(viewModel.userChoosingToViewAllDishes == false) {
                 for(ingredient in viewModel.getIngredientList()) {

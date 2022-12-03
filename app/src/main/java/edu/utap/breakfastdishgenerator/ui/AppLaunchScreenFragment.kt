@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import edu.utap.breakfastdishgenerator.MainActivity
@@ -41,7 +40,7 @@ class AppLaunchScreenFragment : Fragment() {
         val main = activity as MainActivity?
 
         val actionBarBinding = main?.actionBarBinding
-        actionBarBinding?.actionBarTitleOfCurrentPage?.text = "BreakfastDishGenerator"
+        actionBarBinding?.actionBarTitleOfCurrentPage?.text = "Breakfast Dish Generator"
         actionBarBinding?.actionGoHome?.visibility = View.GONE
         actionBarBinding?.actionGoToFavorites?.visibility = View.GONE
 
@@ -55,7 +54,6 @@ class AppLaunchScreenFragment : Fragment() {
                     R.id.main_frame, UserHomepageFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }

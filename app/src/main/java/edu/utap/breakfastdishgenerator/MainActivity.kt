@@ -35,19 +35,15 @@ class MainActivity : AppCompatActivity() {
         // No back stack for home
         supportFragmentManager.commit {
             add(R.id.main_frame, AppLaunchScreenFragment.newInstance(), mainFragTag)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             addToBackStack(null)
         }
     }
 
     fun actionBarLaunchUserHomepageFragment() {
-        // XXX Write me actionBarBinding
         actionBarBinding?.actionGoHome?.setOnClickListener {
             viewModel.whichDishesFragmentUserIsCurrentlyViewing = 0
             supportFragmentManager.commit {
                 replace(R.id.main_frame, UserHomepageFragment.newInstance(), mainFragTag)
-                // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -58,7 +54,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.whichDishesFragmentUserIsCurrentlyViewing = 1
             supportFragmentManager.commit {
                 replace(R.id.main_frame, FavoritesFragment.newInstance(), "favoriteDishesFrag")
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }

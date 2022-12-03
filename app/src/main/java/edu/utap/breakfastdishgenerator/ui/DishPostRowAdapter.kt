@@ -65,7 +65,6 @@ class DishPostRowAdapter(private val viewModel: MainViewModel)
                             }
                             notifyDataSetChanged()
                         }
-
                     }
                 }
             }

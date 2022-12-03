@@ -14,6 +14,7 @@ import edu.utap.breakfastdishgenerator.api.IngredientInfo
 import edu.utap.breakfastdishgenerator.glide.Glide
 
 class MainViewModel : ViewModel() {
+    // User info variables
     private var displayName = MutableLiveData("Uninitialized")
     private var email = MutableLiveData("Uninitialized")
     private var uid = MutableLiveData("Uninitialized")
@@ -22,11 +23,9 @@ class MainViewModel : ViewModel() {
     private val ingredientsListAsIngredientInfos = mutableListOf<IngredientInfo>()
 
     private val dishPostInfos = MutableLiveData<List<DishPostInfo>>()
-    private val dishPostInfosWithIngredientsFromUser = mutableListOf<DishPostInfo>()
-    // Maintain a separate list of all favorite dish posts
-    private var favDishPostInfos = mutableListOf<DishPostInfo>()
+    private var favDishPostInfos = mutableListOf<DishPostInfo>() // Maintain a separate list of all favorite dish posts
 
-    var userChoosingToViewAllDishes: Boolean = false
+    var userChoosingToViewAllDishes: Boolean = false // Boolean for if user clicks to view all possible dishes or not
     var whichDishesFragmentUserIsCurrentlyViewing: Int = 0  // Values for which fragment user is currently viewing for Dish Posts: 0 for DishesRelatedToIngredients, 1 for FavoriteDishes
     var whichIngredientFragmentUserIsCurrentlyViewing: Int = 0 // Values for which fragment user is currently viewing for ingredients to update RecyclerView: 0 for FindDishesToMake, 1 for AddIngredientFragment
 
@@ -61,14 +60,9 @@ class MainViewModel : ViewModel() {
         userLogout()
     }
 
-    // Methods to for the dishPostList
+    // Methods for the dishPostInfos list
     fun getDishPostInfos(): MutableLiveData<List<DishPostInfo>> {
         return dishPostInfos
-    }
-    fun getDishPostInfosWithIngredientsFromUser(): List<DishPostInfo> {//LiveData<List<DishPostInfo>> {
-        /*var liveDataDishPostInfo = MutableLiveData<List<DishPostInfo>>(dishPostInfosWithIngredientsFromUser)
-        return liveDataDishPostInfo*/
-        return dishPostInfosWithIngredientsFromUser
     }
     fun getDishPostInfoAt(position: Int) : DishPostInfo {
         if (whichDishesFragmentUserIsCurrentlyViewing == 0) {
@@ -85,9 +79,6 @@ class MainViewModel : ViewModel() {
         dishPostInfos.value = dishPostInfos.value?.toMutableList()?.apply {
             remove(dishPostInfo)
         }?.toList()
-    }
-    fun addDishPostInfoToOneWithIngredients(dishPostInfo: DishPostInfo) {
-        dishPostInfosWithIngredientsFromUser.add(dishPostInfo)
     }
 
     // Methods to observe the lists
@@ -157,6 +148,7 @@ class MainViewModel : ViewModel() {
     }
 
 
+    // Used when user clicks to see more information about a particular dish
     companion object {
         fun moveOnToDishPostScreen(context: Context, dishPost: DishPostInfo) {
             val dishPostIntent = Intent(context, DishPostInfoScreen::class.java)

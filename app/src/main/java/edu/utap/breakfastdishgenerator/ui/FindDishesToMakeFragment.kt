@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,7 +73,6 @@ class FindDishesToMakeFragment : Fragment() {
                     R.id.main_frame, AddIngredientsByFoodGroupFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -92,7 +90,6 @@ class FindDishesToMakeFragment : Fragment() {
                         R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),
                         MainActivity.mainFragTag
                     )
-                    //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     addToBackStack(null)
                 }
             }

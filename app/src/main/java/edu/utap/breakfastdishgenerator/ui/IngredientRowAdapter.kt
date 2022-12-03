@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -65,7 +64,6 @@ class IngredientRowAdapter(private val viewModel: MainViewModel, val context: Co
                                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),
                                     MainActivity.mainFragTag
                                 )
-                                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 addToBackStack(null)
                             }
                         }
