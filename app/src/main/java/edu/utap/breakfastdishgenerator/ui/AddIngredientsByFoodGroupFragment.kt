@@ -47,7 +47,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Fruits"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -59,7 +59,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Vegetables"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -71,7 +71,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Grains"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -83,7 +83,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Proteins"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -95,7 +95,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Dairy"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -107,7 +107,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Sweets"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -119,7 +119,7 @@ class AddIngredientsByFoodGroupFragment : Fragment() {
                     R.id.main_frame, AddIngredientFragment.newInstance("Others"),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }

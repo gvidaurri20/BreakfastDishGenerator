@@ -55,7 +55,7 @@ class AppLaunchScreenFragment : Fragment() {
                     R.id.main_frame, UserHomepageFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }

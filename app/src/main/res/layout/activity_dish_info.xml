@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -26,6 +27,7 @@
                 android:layout_margin="10dp"
                 android:scrollbars="vertical"
                 android:textSize="25dp"
+                android:textColor="#0000FF"
                 />
             <ImageView
                 android:id="@+id/image_of_dish"
@@ -41,6 +43,7 @@
                 android:layout_margin="10dp"
                 android:scrollbars="vertical"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 />
             <TextView
                 android:id="@+id/servings_textview"
@@ -49,6 +52,7 @@
                 android:layout_margin="10dp"
                 android:scrollbars="vertical"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 />
             <TextView
                 android:id="@+id/ingredients_needed_textview"
@@ -57,6 +61,7 @@
                 android:layout_margin="10dp"
                 android:scrollbars="vertical"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 />
             <TextView
                 android:id="@+id/generic_recipe_textview"
@@ -65,6 +70,7 @@
                 android:layout_margin="10dp"
                 android:scrollbars="vertical"
                 android:textSize="20dp"
+                android:textColor="#000000"
                 />
         </LinearLayout>
     </ScrollView>

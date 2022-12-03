@@ -95,9 +95,9 @@ class DishPostRowAdapter(private val viewModel: MainViewModel)
         binding.titleOfDish.text = dishPostInfo.TitleOfDish
         viewModel.glideFetch(viewModel.getDishPostInfoAt(position).DishImageName, binding.imageOfDish)
         if (viewModel.isFavorite(dishPostInfo)) {
-            binding.rowFav.setImageResource(R.drawable.ic_favorite_black_24dp)
+            binding.rowFav.setImageResource(R.drawable.ic_favorite_blue_24dp)
         } else {
-            binding.rowFav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+            binding.rowFav.setImageResource(R.drawable.ic_favorite_border_blue_24dp)
         }
     }
 }

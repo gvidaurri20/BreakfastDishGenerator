@@ -8,14 +8,14 @@
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
         android:id="@+id/actionGoHome"
-        android:src="@drawable/ic_home_black_24dp"
+        android:src="@drawable/ic_home_white_24dp"
         />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
         android:id="@+id/actionGoToFavorites"
-        android:src="@drawable/ic_favorite_black_24dp"
+        android:src="@drawable/ic_favorite_white_24dp"
         />
     <TextView
         android:id="@+id/actionBarTitleOfCurrentPage"

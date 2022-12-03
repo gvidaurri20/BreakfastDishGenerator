@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.AppLaunchScreenFragment">
 
 
@@ -22,6 +23,8 @@
             android:gravity="center"
             android:text="Breakfast Dish Generator"
             android:textSize="50dp"
+            android:textColor="#0000FF"
+            android:textStyle="italic"
             android:layout_weight="1"
             />
 
@@ -55,7 +58,8 @@
             android:layout_margin="10dp"
             android:gravity="left"
             android:text="When you click the Sign In button, on the next page enter the email address associated with your account. If you are a new user, it will prompt you to create a new account and password."
-            android:textSize="22dp"
+            android:textSize="20dp"
+            android:textColor="#ADD8E6"
             android:layout_weight="1"
             />
     </LinearLayout>

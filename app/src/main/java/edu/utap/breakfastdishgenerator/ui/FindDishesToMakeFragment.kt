@@ -74,7 +74,7 @@ class FindDishesToMakeFragment : Fragment() {
                     R.id.main_frame, AddIngredientsByFoodGroupFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -92,7 +92,7 @@ class FindDishesToMakeFragment : Fragment() {
                         R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),
                         MainActivity.mainFragTag
                     )
-                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     addToBackStack(null)
                 }
             }

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import edu.utap.breakfastdishgenerator.MainActivity
+import edu.utap.breakfastdishgenerator.api.DishPostInfo
 import edu.utap.breakfastdishgenerator.databinding.FragmentRvBinding
 
 

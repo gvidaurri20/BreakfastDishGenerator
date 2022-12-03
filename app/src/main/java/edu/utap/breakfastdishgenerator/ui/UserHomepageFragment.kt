@@ -42,7 +42,7 @@ class UserHomepageFragment : Fragment() {
                     R.id.main_frame, FavoritesFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -55,7 +55,7 @@ class UserHomepageFragment : Fragment() {
                     R.id.main_frame, FindDishesToMakeFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -68,7 +68,7 @@ class UserHomepageFragment : Fragment() {
                     R.id.main_frame, DishesRelatedToIngredientsFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }
@@ -91,7 +91,7 @@ class UserHomepageFragment : Fragment() {
                     R.id.main_frame, AppLaunchScreenFragment.newInstance(),
                     MainActivity.mainFragTag
                 )
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                //setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 addToBackStack(null)
             }
         }

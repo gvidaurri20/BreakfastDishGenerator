@@ -1,7 +1,11 @@
 package edu.utap.breakfastdishgenerator.ui
 
 import android.R
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -50,10 +54,42 @@ class DishPostInfoScreen : AppCompatActivity() {
 
         binding.titleOfDishTextview.text = dishPostTitle.replace("\\n", "\n")
         viewModel.glideFetch(dishPostImage, binding.imageOfDish)
-        binding.nutritionInfoTextview.text = "Nutrition Info: \n" + dishPostNutritionInfo.replace("\\n", "\n")
-        binding.servingsTextview.text = "Servings Per Dish: \n" + dishPostAmtOfServings.replace("\\n", "\n")
-        binding.ingredientsNeededTextview.text = "Ingredients Needed: \n" + dishPostIngredientsNeeded.replace("\\n", "\n")
-        binding.genericRecipeTextview.text = "General Recipe: \n" + dishPostRecipe.replace("\\n", "\n")
+
+        val builder = SpannableStringBuilder()
+        var str1 = SpannableString("Nutrition Info: \n")
+        str1.setSpan(ForegroundColorSpan(Color.RED), 0, str1.length, 0)
+        builder.append(str1)
+        var str2 = SpannableString(dishPostNutritionInfo.replace("\\n", "\n"))
+        str2.setSpan(ForegroundColorSpan(Color.LTGRAY), 0, str2.length, 0)
+        builder.append(str2)
+        binding.nutritionInfoTextview.text = builder//"Nutrition Info: \n" + dishPostNutritionInfo.replace("\\n", "\n")
+
+        val builder2 = SpannableStringBuilder()
+        str1 = SpannableString("Servings Per Dish: \n")
+        str1.setSpan(ForegroundColorSpan(Color.RED), 0, str1.length, 0)
+        builder2.append(str1)
+        str2 = SpannableString(dishPostAmtOfServings.replace("\\n", "\n"))
+        str2.setSpan(ForegroundColorSpan(Color.LTGRAY), 0, str2.length, 0)
+        builder2.append(str2)
+        binding.servingsTextview.text = builder2//"Servings Per Dish: \n" + dishPostAmtOfServings.replace("\\n", "\n")
+
+        val builder3 = SpannableStringBuilder()
+        str1 = SpannableString("Ingredients Needed: \n")
+        str1.setSpan(ForegroundColorSpan(Color.RED), 0, str1.length, 0)
+        builder3.append(str1)
+        str2 = SpannableString(dishPostIngredientsNeeded.replace("\\n", "\n"))
+        str2.setSpan(ForegroundColorSpan(Color.LTGRAY), 0, str2.length, 0)
+        builder3.append(str2)
+        binding.ingredientsNeededTextview.text = builder3//"Ingredients Needed: \n" + dishPostIngredientsNeeded.replace("\\n", "\n")
+
+        val builder4 = SpannableStringBuilder()
+        str1 = SpannableString("General Recipe: \n")
+        str1.setSpan(ForegroundColorSpan(Color.RED), 0, str1.length, 0)
+        builder4.append(str1)
+        str2 = SpannableString(dishPostRecipe.replace("\\n", "\n"))
+        str2.setSpan(ForegroundColorSpan(Color.LTGRAY), 0, str2.length, 0)
+        builder4.append(str2)
+        binding.genericRecipeTextview.text = builder4//"General Recipe: \n" + dishPostRecipe.replace("\\n", "\n")
     }
 
 }

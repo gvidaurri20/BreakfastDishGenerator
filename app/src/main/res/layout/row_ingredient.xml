@@ -30,6 +30,7 @@
                     android:textSize="30sp"
                     android:text="Ingredient"
                     android:id="@+id/nameOfIngredient"
+                    android:textColor="#00008B"
                     android:layout_weight="1"
                     />
             <Button
